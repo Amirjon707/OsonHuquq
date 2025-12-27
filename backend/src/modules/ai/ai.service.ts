@@ -1,36 +1,40 @@
-import { openai } from "../../config/openai";
-import {
-  generateDocumentPrompt,
-  simplifyPrompt,
-  riskDetectionPrompt,
-} from "./prompts";
+import OpenAI from "openai";
+import { generateDocumentPrompt, simplifyDocumentPrompt, riskCheckPrompt } from "./prompts";
 
-export const generateDocumentAI = async (
-  documentType: string,
-  answers: any
-) => {
-  const prompt = generateDocumentPrompt(documentType, answers);
-  const response = await openai.chat.completions.create({
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+export const generateDocument = async (type: string, answers: any) => {
+  const prompt = generateDocumentPrompt(type, answers);
+  const response = await client.chat.completions.create({
     model: "gpt-4",
     messages: [{ role: "user", content: prompt }],
+    temperature: 0.2
   });
   return response.choices[0].message?.content || "";
 };
 
-export const simplifyAI = async (text: string) => {
-  const prompt = simplifyPrompt(text);
-  const response = await openai.chat.completions.create({
+export const simplifyDocument = async (text: string) => {
+  const prompt = simplifyDocumentPrompt(text);
+  const response = await client.chat.completions.create({
     model: "gpt-4",
     messages: [{ role: "user", content: prompt }],
+    temperature: 0.2
   });
   return response.choices[0].message?.content || "";
 };
 
-export const riskDetectionAI = async (text: string) => {
-  const prompt = riskDetectionPrompt(text);
-  const response = await openai.chat.completions.create({
+export const checkRisk = async (text: string) => {
+  const prompt = riskCheckPrompt(text);
+  const response = await client.chat.completions.create({
     model: "gpt-4",
     messages: [{ role: "user", content: prompt }],
+    temperature: 0
   });
-  return response.choices[0].message?.content || "";
+  try {
+    return JSON.parse(response.choices[0].message?.content || "[]");
+  } catch {
+    return [];
+  }
 };

@@ -1,20 +1,26 @@
-export const generateDocumentPrompt = (documentType: string, answers: any) => `
-Siz O'zbekistonda huquqiy hujjat yozuvchi AI asistentsiz.
-Foydalanuvchi uchun quyidagi hujjat turini yaratish kerak: ${documentType}.
-Foydalanuvchi javoblari: ${JSON.stringify(answers)}.
-Natija rasmiy huquqiy shaklda, bo'limlarga ajratilgan holda bo'lsin.
-`;
+export const generateDocumentPrompt = (type: string, answers: any) => {
+  return `
+Siz O'zbekistondagi huquqiy hujjat generatorisiz.
+Hujjat turi: ${type}
+Foydalanuvchi javoblari: ${JSON.stringify(answers)}
 
-export const simplifyPrompt = (text: string) => `
-Quyidagi huquqiy matnni oddiy o'zbek tiliga tushuntiring va xavfli yoki muhim bo'limlarni ajratib ko'rsating.
-Matn: ${text}
+Rasmiy, huquqiy tuzilgan matn hosil qiling.
+Faqat matn qaytaring, hech qanday qo‘shimcha sharh yo‘q.
 `;
+};
 
-export const riskDetectionPrompt = (text: string) => `
-Quyidagi hujjatni tahlil qiling va xavfli shartlarni aniqlang:
-- Jarimalar
-- Bir tomonlama o'zgarishlar
-- Avtomatik yangilanishlar
-JSON formatida qaytaring: type, description, severity.
-Matn: ${text}
+export const simplifyDocumentPrompt = (text: string) => {
+  return `
+Quyidagi matnni oddiy o‘zbek tiliga tushunarli qilib tarjima qiling:
+"${text}"
+Faqat matn qaytaring.
 `;
+};
+
+export const riskCheckPrompt = (text: string) => {
+  return `
+Quyidagi hujjatda xavfli shartlarni aniqlang va tavsifini qaytaring:
+"${text}"
+Format: JSON array [{"type": "Penalty|Unilateral|Auto-renew", "description": "...", "severity": "LOW|MEDIUM|HIGH"}]
+`;
+};
