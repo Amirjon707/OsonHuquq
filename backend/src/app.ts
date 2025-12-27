@@ -1,14 +1,18 @@
 import express from "express";
 import cors from "cors";
-import { authRoutes } from "./modules/auth/auth.routes";
-import { documentRoutes } from "./modules/documents/document.routes";
-import { aiRoutes } from "./modules/ai/ai.routes";
+import authRoutes from "./modules/auth/auth.routes";
+import documentRoutes from "./modules/document/document.routes";
 
-export const app = express();
+import { errorMiddleware } from "./middlewares/error.middleware";
+
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/documents", documentRoutes);
-app.use("/api/ai", aiRoutes);
+app.use("/api/document", documentRoutes);
+
+app.use(errorMiddleware);
+
+export default app;

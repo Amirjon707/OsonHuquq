@@ -1,9 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export const ENV = {
-  PORT: process.env.PORT || 5000,
-  MONGO_URI: process.env.MONGO_URI!,
-  JWT_SECRET: process.env.JWT_SECRET!,
-  OPENAI_KEY: process.env.OPENAI_KEY!,
-};
+export const PORT = process.env.PORT || 5000;
+export const MONGO_URI = process.env.MONGO_URI || "";
+export const JWT_SECRET = process.env.JWT_SECRET || "";
+export const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";

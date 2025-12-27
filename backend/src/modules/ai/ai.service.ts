@@ -1,15 +1,36 @@
 import { openai } from "../../config/openai";
+import {
+  generateDocumentPrompt,
+  simplifyPrompt,
+  riskDetectionPrompt,
+} from "./prompts";
 
-export const simplifyText = async (text: string, plan: string) => {
-  const prompt =
-    plan === "free"
-      ? `Explain simply in Uzbek:\n${text}`
-      : `Explain clause-by-clause in simple Uzbek and highlight risks:\n${text}`;
-
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
+export const generateDocumentAI = async (
+  documentType: string,
+  answers: any
+) => {
+  const prompt = generateDocumentPrompt(documentType, answers);
+  const response = await openai.chat.completions.create({
+    model: "gpt-4",
     messages: [{ role: "user", content: prompt }],
   });
+  return response.choices[0].message?.content || "";
+};
 
-  return completion.choices[0].message.content;
+export const simplifyAI = async (text: string) => {
+  const prompt = simplifyPrompt(text);
+  const response = await openai.chat.completions.create({
+    model: "gpt-4",
+    messages: [{ role: "user", content: prompt }],
+  });
+  return response.choices[0].message?.content || "";
+};
+
+export const riskDetectionAI = async (text: string) => {
+  const prompt = riskDetectionPrompt(text);
+  const response = await openai.chat.completions.create({
+    model: "gpt-4",
+    messages: [{ role: "user", content: prompt }],
+  });
+  return response.choices[0].message?.content || "";
 };
