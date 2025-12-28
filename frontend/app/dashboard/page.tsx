@@ -11,7 +11,7 @@ export default function Dashboard() {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    if (!getToken()) window.location.href = "/(auth)/login";
+    if (!getToken()) window.location.href = "/login";
   }, []);
 
   const submit = async () => {

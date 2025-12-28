@@ -13,9 +13,7 @@ export default function RootLayout({
   return (
     <html lang="uz">
       <body>
-        <main className="min-h-screen flex flex-col">
-          {children}
-        </main>
+        <main className="min-h-screen flex flex-col">{children}</main>
       </body>
     </html>
   );
