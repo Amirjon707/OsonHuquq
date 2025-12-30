@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, LogOut, Home } from "lucide-react";
+import {
+  FileText,
+  LogOut,
+  Home,
+  Languages,
+  ShieldAlert,
+  Library,
+} from "lucide-react";
 import { logout } from "@/app/lib/auth";
 
 export default function DashboardLayout({
@@ -12,32 +19,54 @@ export default function DashboardLayout({
   return (
     <div className="flex w-screen min-h-screen bg-slate-100 ">
       {/* SIDEBAR */}
-      <aside className="w-[320px] shrink-0 bg-white">
+      <aside className="w-[320px] shrink-0 bg-white flex flex-col">
         <div className="h-20 flex items-center px-8 text-2xl font-bold">
           OsonHuquq
         </div>
 
-        <nav className="px-4 space-y-2">
+        <nav className="px-4 space-y-2 flex-1">
           <Link
             href="/dashboard"
-            className="flex items-center justify-center px-6 py-4 rounded-xl hover:bg-indigo-50"
+            className="flex items-center justify-start px-6 py-4 rounded-xl hover:bg-indigo-50"
           >
             <Home className="w-5 h-5 mr-2" />
-            Dashboard
+            Asosiy
           </Link>
           <Link
             href="/dashboard/generate"
-            className="px-6 py-4 rounded-xl hover:bg-indigo-50 flex items-center justify-center "
+            className="px-6 py-4 rounded-xl hover:bg-indigo-50 flex items-center justify-start"
           >
             <FileText className="w-5 h-5 mr-2" />
-            Generate
+            AI Document Generator
+          </Link>
+          <Link
+            href="/dashboard/simplify"
+            className="px-6 py-4 rounded-xl hover:bg-indigo-50 flex items-center justify-start"
+          >
+            <Languages className="w-5 h-5 mr-2" />
+            Oddiy tilga tarjima
+          </Link>
+          <Link
+            href="/dashboard/risk"
+            className="px-6 py-4 rounded-xl hover:bg-indigo-50 flex items-center justify-start"
+          >
+            <ShieldAlert className="w-5 h-5 mr-2" />
+            Risk Detector
+          </Link>
+          <Link
+            href="/dashboard/templates"
+            className="px-6 py-4 rounded-xl hover:bg-indigo-50 flex items-center justify-start"
+          >
+            <Library className="w-5 h-5 mr-2" />
+            Shablon Kutubxonasi
           </Link>
         </nav>
 
-        <div className="p-6">
+        {/* Logout tugmasi eng pastda */}
+        <div className="p-6 my-auto">
           <button
             onClick={logout}
-            className="w-full py-3 rounded-xl bg-red-100 text-red-600 flex justify-center items-center cursor-pointer"
+            className="w-full px-8 py-4 rounded-xl bg-red-100 text-red-600 flex justify-start items-center cursor-pointer"
           >
             <LogOut className="w-5 h-5 mr-2" />
             Logout
