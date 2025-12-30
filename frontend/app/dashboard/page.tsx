@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 to-slate-100 p-8">
+    <div className="w-full bg-gradient-to-br from-slate-50 to-slate-100 p-8">
       {/* HEADER */}
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-slate-900">
