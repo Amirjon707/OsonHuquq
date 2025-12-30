@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Eye, EyeOff, Lock, Mail, User, Check } from "lucide-react";
 import { register } from "@/app/services/auth.service";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -39,7 +39,8 @@ export default function RegisterPage() {
       toast.success("Ro'yxatdan o'tildi. Kirish sahifasiga o'ting.");
       window.location.href = "/login";
     } catch (err) {
-      toast.error(`Register error ${err}`);
+      toast.error(`Bu user ro'yxatdan o'tgan!`);
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -47,7 +48,16 @@ export default function RegisterPage() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={true}
+        closeOnClick={true}
+        rtl={false}
+        theme="light"
+        transition={Zoom}
+      />
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 px-4 py-8">
         <div className="w-full max-w-md">
           {/* Card */}
