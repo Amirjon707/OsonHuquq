@@ -6,13 +6,7 @@ import clsx from "clsx";
 
 type Category = "All" | "Rental" | "HR" | "Finance" | "Business";
 
-const categories: Category[] = [
-  "All",
-  "Rental",
-  "HR",
-  "Finance",
-  "Business",
-];
+const categories: Category[] = ["All", "Rental", "HR", "Finance", "Business"];
 
 const templates = [
   {
@@ -61,8 +55,7 @@ export default function TemplatesPage() {
   const [search, setSearch] = useState("");
 
   const filtered = templates.filter((t) => {
-    const matchCategory =
-      active === "All" || t.category === active;
+    const matchCategory = active === "All" || t.category === active;
 
     const matchSearch =
       t.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -71,12 +64,18 @@ export default function TemplatesPage() {
     return matchCategory && matchSearch;
   });
 
+  document.title = "Shablon kutubxonasi | Oson Huquq";
+
   return (
     <div className="p-8 bg-white rounded-3xl shadow">
       {/* HEADER */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900">Shablon kutubxonasi</h1>
-        <p className="text-slate-500 mt-2">Shablon kutubxonasiga xush kelibsiz, user</p>
+        <h1 className="text-3xl font-bold text-slate-900">
+          Shablon kutubxonasi
+        </h1>
+        <p className="text-slate-500 mt-2">
+          Shablon kutubxonasiga xush kelibsiz, user
+        </p>
       </div>
 
       {/* SEARCH + FILTER */}
@@ -138,17 +137,11 @@ export default function TemplatesPage() {
               <FileText className="text-blue-600" />
             </div>
 
-            <h3 className="font-semibold text-slate-900 mb-2">
-              {t.title}
-            </h3>
-            <p className="text-sm text-slate-500 mb-6">
-              {t.desc}
-            </p>
+            <h3 className="font-semibold text-slate-900 mb-2">{t.title}</h3>
+            <p className="text-sm text-slate-500 mb-6">{t.desc}</p>
 
             <div className="flex items-center justify-between text-sm">
-              <span className="text-slate-400">
-                {t.uses} uses
-              </span>
+              <span className="text-slate-400">{t.uses} uses</span>
               <button className="text-blue-600 font-medium hover:underline">
                 Preview
               </button>
