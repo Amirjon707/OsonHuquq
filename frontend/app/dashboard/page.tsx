@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <div className="w-full bg-gradient-to-br from-slate-50 to-slate-100 p-8">
+    <div className="w-full bg-white p-8 rounded-3xl shadow">
       {/* HEADER */}
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-slate-900">
